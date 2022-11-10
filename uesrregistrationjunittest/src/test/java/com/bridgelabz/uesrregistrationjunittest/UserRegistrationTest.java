@@ -35,9 +35,13 @@ static void display() {
 	void given_email_id_should_returnTrue() {
 		UserRegistration user = new UserRegistration();
 		Boolean result = user.checkEmailId("pree12@gmail.com");
-		Assertions.assertEquals(result,true);
-		
+		Assertions.assertEquals(result,true);	
 	}
-
+   @Test
+   void given_phone_number_should_returnTrue() {
+	   UserRegistration user = new UserRegistration();
+		Boolean result = user.checkPhoneNumber("91 8553266354");
+		Assertions.assertEquals(result,true);	
+   }
 	
 }
