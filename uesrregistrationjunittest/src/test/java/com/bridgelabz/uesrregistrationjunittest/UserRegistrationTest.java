@@ -22,5 +22,20 @@ static void display() {
 		UserRegistration user = new UserRegistration();
 		Boolean result = user.checkFirstName("Preeti");
 		Assertions.assertEquals(result,true);
+
 	}
+	
+	@Test
+	void given_last_name_should_returnTrue() {
+		UserRegistration user = new UserRegistration();
+		Boolean result = user.checkLastName("Ghatage");
+		Assertions.assertEquals(result,true);
+
+		
+		
+		
+		
+		
+	}
+	
 }
