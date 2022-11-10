@@ -43,5 +43,10 @@ static void display() {
 		Boolean result = user.checkPhoneNumber("91 8553266354");
 		Assertions.assertEquals(result,true);	
    }
-	
+	@Test
+	void given_password_should_returnTrue() {
+		UserRegistration user = new UserRegistration();
+		Boolean result = user.password("srikrishna");
+		Assertions.assertEquals(result,true);		
+	}
 }
