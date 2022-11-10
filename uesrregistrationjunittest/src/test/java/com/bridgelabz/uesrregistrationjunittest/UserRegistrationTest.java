@@ -30,12 +30,14 @@ static void display() {
 		UserRegistration user = new UserRegistration();
 		Boolean result = user.checkLastName("Ghatage");
 		Assertions.assertEquals(result,true);
-
-		
-		
-		
-		
+	}
+	@Test
+	void given_email_id_should_returnTrue() {
+		UserRegistration user = new UserRegistration();
+		Boolean result = user.checkEmailId("pree12@gmail.com");
+		Assertions.assertEquals(result,true);
 		
 	}
+
 	
 }
