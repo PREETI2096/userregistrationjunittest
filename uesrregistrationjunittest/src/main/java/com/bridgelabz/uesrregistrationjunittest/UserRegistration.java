@@ -32,9 +32,5 @@ public class UserRegistration {
 	public Boolean password(String password) {
 		
 		return (Pattern.matches(VALIDATE_PASSWORD, password));
-	}
-
-	
+	}	
 }
-
-
