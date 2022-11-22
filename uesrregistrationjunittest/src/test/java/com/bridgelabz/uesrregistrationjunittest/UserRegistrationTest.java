@@ -1,15 +1,16 @@
 package com.bridgelabz.uesrregistrationjunittest;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
 @RunWith(Parameterized.class)
 public class UserRegistrationTest {
-	
+	static UserRegistration userRegistration = new UserRegistration();
 @Before
   public  void display() {
 	System.out.println("Welcome to User Registration Testing Program");
@@ -18,78 +19,77 @@ public class UserRegistrationTest {
 	public void afterDisplay() {
 		System.out.println("End");
 	}
-	
 	@Test
-	public void given_first_name_should_returnTrue() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.checkFirstName("Preeti");
-		Assert.assertEquals(result,true);
+	public void givenFirstName_WhenValid_ShouldReturnsTrue() throws UserRegistrationException {
+		boolean result = userRegistration.name.validate("Shivani");
+		Assertions.assertTrue(result);
 	}
+
 	@Test
-	public void given_first_name_should_returnFalse() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.checkFirstName("preeti");
-		Assert.assertEquals(result,false);
+	public void givenFirstNameWhenInValidShouldThrowUserRegistrationException() {
+		Assertions.assertThrows(UserRegistrationException.class, () -> userRegistration.name.validate("shivani"));
 	}
-	
+
 	@Test
-	public void given_last_name_should_returnTrue() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.checkLastName("Ghatage");
-		Assert.assertEquals(result,true);
+	public void givenLastNameWhenValidShouldReturnTrue() throws UserRegistrationException {
+		boolean result = userRegistration.name.validate("Kumari");
+		Assertions.assertTrue(result);
 	}
+
 	@Test
-	public void given_last_name_should_returnFalse() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.checkLastName("gha");
-		Assert.assertEquals(result,false);
+	public void givenLastNameWhenInValidShouldThrowUSerRegistrationException() throws UserRegistrationException {
+		Assertions.assertThrows(UserRegistrationException.class, () -> userRegistration.name.validate("kumari"));
+
 	}
+
 	@Test
-	public void given_email_id_should_returnTrue() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.checkEmailId("pree12@gmail.com");
-		Assert.assertEquals(result,true);	
+	public void givenEmailWhenValidShouldReturnTrue() throws UserRegistrationException {
+		boolean result = userRegistration.validEmailId.validate("shivani@mail.com");
+		Assertions.assertTrue(result);
 	}
+
 	@Test
-	public void given_email_id_should_returnFalse() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.checkEmailId("pree.mail.gmail.com");
-		Assert.assertEquals(result,false);	
+	public void givenEmailWhenInValidShouldThrowUserRegistration() throws UserRegistrationException {
+		Assertions.assertThrows(UserRegistrationException.class,
+				() -> userRegistration.validEmailId.validate("Shivani.mail.com.com"));
+
 	}
-   @Test
-  public  void given_phone_number_should_returnTrue() {
-	   UserRegistration user = new UserRegistration();
-		Boolean result = user.checkPhoneNumber("91 8553266354");
-		Assert.assertEquals(result,true);	
-   }
-   @Test
-   public  void given_phone_number_should_returnFalse() {
- 	   UserRegistration user = new UserRegistration();
- 		Boolean result = user.checkPhoneNumber("8553266354");
- 		Assert.assertEquals(result,false);	
-    }
+
 	@Test
-	public void given_password_should_returnTrue() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.password("Srikrishna@34");
-		Assert.assertEquals(result,true);		
+	public void givenPhoneNumWhenValidShouldReturnTrue() throws UserRegistrationException {
+		boolean result = userRegistration.validPhoneNumber.validate("91 9922558888");
+		Assertions.assertTrue(result);
 	}
+
 	@Test
-	public void given_password_should_returnFalse() {
-		UserRegistration user = new UserRegistration();
-		Boolean result = user.password("sr34");
-		Assert.assertEquals(result,false);		
+	public void givenPhoneNumWhenInValidShouldThrowUserRegistrationException() throws UserRegistrationException {
+		Assertions.assertThrows(UserRegistrationException.class,
+				() -> userRegistration.validPhoneNumber.validate("9234398488"));
+
 	}
-	  @Parameterized.Parameters
-	    @ValueSource(strings = {"Abc@yahoo.com","abc@gmail.com.com",})
-	    public void givenEmailWhenValidShouldReturnTrue(String email) {
-		  UserRegistration user = new UserRegistration();
-	        Assert.assertTrue(user.validEmailId(email));
-	    }
-	  @Parameterized.Parameters
-	    @ValueSource(strings = {"abc","abc@.com.my","abc123@gmail.a","abc123@.com","abc@%*.com",})
-	    public void givenEmailWhenInValidShouldReturnFalse(String email) {
-		  UserRegistration user = new UserRegistration();
-	        Assert.assertFalse(user.validEmailId(email));
-	    }
+
+	@Test
+	public void givenPasswordWhenValidShouldReturnTrue() throws UserRegistrationException {
+		boolean result = userRegistration.validPassword.validate("Shivani@gmail7.com");
+		Assertions.assertTrue(result);
+	}
+
+	@Test
+	public void givenPasswordWhenInValidShouldThrowsUserRegistrationException() throws UserRegistrationException {
+		Assertions.assertThrows(UserRegistrationException.class,
+				() -> userRegistration.validPassword.validate("shivanigmailcom"));
+
+	}
+
+	@Parameterized.Parameters
+	@ValueSource(strings = { "Abc@yahoo.com", "abc@gmail.com.com", })
+	public void givenEmailWhenValidShouldReturnTrue(String email) throws UserRegistrationException {
+		Assertions.assertTrue(userRegistration.validEmailId.validate(email));
+	}
+
+	@Parameterized.Parameters
+	@ValueSource(strings = { "abc", "abc@.com.my", "abc123@gmail.a", "abc123@.com", "abc@%*.com", })
+	public void givenEmailWhenInValidShouldThrowUserRegistrationException(String email) {
+		Assertions.assertThrows(UserRegistrationException.class, () -> userRegistration.validEmailId.validate(email));
+	}
 }
