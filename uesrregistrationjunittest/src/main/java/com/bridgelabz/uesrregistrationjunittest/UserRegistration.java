@@ -32,5 +32,12 @@ public class UserRegistration {
 	public Boolean password(String password) {
 		
 		return (Pattern.matches(VALIDATE_PASSWORD, password));
+	}
+
+	public boolean validEmailId(String email) {
+		return false;
+	}	
+	public boolean invalidEmailId(String email) {
+		return false;
 	}	
 }

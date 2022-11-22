@@ -4,7 +4,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+@RunWith(Parameterized.class)
 public class UserRegistrationTest {
 	
 @Before
@@ -77,4 +80,16 @@ public class UserRegistrationTest {
 		Boolean result = user.password("sr34");
 		Assert.assertEquals(result,false);		
 	}
+	  @Parameterized.Parameters
+	    @ValueSource(strings = {"Abc@yahoo.com","abc@gmail.com.com",})
+	    public void givenEmailWhenValidShouldReturnTrue(String email) {
+		  UserRegistration user = new UserRegistration();
+	        Assert.assertTrue(user.validEmailId(email));
+	    }
+	  @Parameterized.Parameters
+	    @ValueSource(strings = {"abc","abc@.com.my","abc123@gmail.a","abc123@.com","abc@%*.com",})
+	    public void givenEmailWhenInValidShouldReturnFalse(String email) {
+		  UserRegistration user = new UserRegistration();
+	        Assert.assertFalse(user.validEmailId(email));
+	    }
 }
